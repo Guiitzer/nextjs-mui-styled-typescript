@@ -30,12 +30,19 @@
     },
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "react/forbid-prop-types": [0, { "forbid": [false], "checkContextTypes": false, "checkChildContextTypes": false }],
-        "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
+        "react/require-default-props": "off",
+        "react/forbid-prop-types": [0, {
+            "forbid": [false],
+            "checkContextTypes": false,
+            "checkChildContextTypes": false
+        }],
+        "react/jsx-filename-extension": ["warn", {
+            "extensions": [".tsx"]
+        }],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
-            "allowExpressions": true
+                "allowExpressions": true
             }
         ],
         "react-hooks/rules-of-hooks": "error",
@@ -49,12 +56,12 @@
             "error",
             "ignorePackages",
             {
-              "js": "never",
-              "jsx": "never",
-              "ts": "never",
-              "tsx": "never"
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
             }
-         ]
+        ]
     },
     "globals": {
         "React": true,
@@ -68,12 +75,10 @@
         "jsdom": true,
         "JSX": true
     },
-    "overrides": [
-        {
-            "files": ["*.ts"],
-            "rules": {
-                "no-undef": "off"
-            }
+    "overrides": [{
+        "files": ["*.ts"],
+        "rules": {
+            "no-undef": "off"
         }
-    ]
+    }]
 }

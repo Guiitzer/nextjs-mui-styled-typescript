@@ -1,5 +1,9 @@
-import {  Box, Modal, Typography } from "@material-ui/core"
 import React, { Dispatch, SetStateAction } from "react"
+
+import { Modal, Box, Typography } from "@mui/material";
+
+import { ModalContainer } from "./styles";
+import globalTheme from "../../../styles/globaltheme";
 
 type ModalProps = {
   open: boolean;
@@ -15,9 +19,11 @@ export default function SimpleModal({ open, setOpen, children }: ModalProps):JSX
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    height: 400,
+    bgcolor: globalTheme.background.default,
     border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: 5,
     p: 4,
   };
 
@@ -30,9 +36,14 @@ export default function SimpleModal({ open, setOpen, children }: ModalProps):JSX
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography align="center" id="modal-modal-title" variant="h6" component="h2">
           {children}
         </Typography>
+      <ModalContainer>
+        <h1>template by:</h1>
+        <h1>Guilherme Tosta ´aka´ Guiitzer</h1>
+        <h2>:)</h2>
+      </ModalContainer>
       </Box>
     </Modal>
   </div>

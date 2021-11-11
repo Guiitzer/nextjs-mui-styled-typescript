@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
- import 'styled-components'
- import { type } from 'os'
+
+import 'styled-components'
 import globaltheme from './globaltheme'
 
  export type Theme = typeof globaltheme

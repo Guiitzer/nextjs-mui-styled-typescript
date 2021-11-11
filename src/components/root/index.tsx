@@ -1,9 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
 
-import { Button, Divider, Input } from '@material-ui/core';
+import { Button, Divider, Input } from '@mui/material';
 
 import SimpleModal from '../../shared/components/Modal';
-import { Container, Title, ButtonsContainer } from './styles';
+import { Container, Title, ButtonsContainer, ImageContainer } from './styles';
 
 export default function Index(): JSX.Element {
   const [counter, setCounter] = React.useState<number>(5);
@@ -12,7 +13,21 @@ export default function Index(): JSX.Element {
 
   return (
     <Container>
-      <Title>Contador</Title>
+      <ImageContainer>
+       <Image
+        src='/mui.png'
+        layout='intrinsic'
+        height='100px'
+        width='100px'
+      />
+       <Image
+        src='/styled-types.png'
+        layout='fixed'
+        height='100px'
+        width='300px'
+      />
+      </ImageContainer>
+      <Title>Next.js/ Mui / Styled / Typescript</Title>
       <h2>{counter}</h2>
       <ButtonsContainer>
         <Button
@@ -40,6 +55,7 @@ export default function Index(): JSX.Element {
       <SimpleModal open={modalOpen} setOpen={() => setModalOpen(false)}>
         {textValue.length > 0 ? textValue : 'Digite algo no campo anterior' }
       </SimpleModal>
+     
     </Container>
   );
 }

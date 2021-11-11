@@ -1,9 +1,6 @@
 import {  ReactElement } from 'react';
-import { ptBR } from '@material-ui/core/locale';
-import {
-   createTheme,
-   ThemeProvider as MuiThemeProvider
-} from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 export const theme = createTheme({
     palette:{
@@ -37,17 +34,15 @@ export const theme = createTheme({
          primary:"rgba(0, 0, 0, 0.87)",
          secondary:"#afafaf",
          disabled:"rgba(119, 119, 119, 0.38)",
-         hint:"#2c2c2c608)"
       }
    }
   },
-  ptBR
 );
 
 const AppTheme = ({ children }: any): ReactElement => (
-   <MuiThemeProvider theme={theme}>
+   <ThemeProvider theme={theme}>
       {children}
-   </MuiThemeProvider>
+   </ThemeProvider>
 );
 
 export default AppTheme;

@@ -1,43 +1,45 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import Head from 'next/head';
+import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
-import globaltheme from '../styles/globaltheme'
+import createCache from '@emotion/cache';
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+
 import AppTheme from '../styles/theme';
+import globaltheme from '../styles/globaltheme';
 import GlobalStyle from '../styles/global';
 
-export default function MyApp(props: any): JSX.Element {
-  const { Component, pageProps } = props;
 
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles: any = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  });
 
-  return (
-    <>
-      <Head>
-        <title>Template</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <AppTheme>
-        <ThemeProvider theme={globaltheme}>
-        <Component {...pageProps} />
-        <GlobalStyle />
-        </ThemeProvider>
-      </AppTheme>
-    </>
-  );
+// Client-side cache, shared for the whole session of the user in the browser.
+function createEmotionCache(): EmotionCache {
+  return createCache({ key: 'css' });
 }
 
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
-};
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+export default function MyApp(props: MyAppProps): JSX.Element {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  return (
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>My page</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <AppTheme>
+      <ThemeProvider theme={globaltheme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Component {...pageProps} />
+        <GlobalStyle />
+      </ThemeProvider>
+      </AppTheme>
+    </CacheProvider>
+  );
+}
